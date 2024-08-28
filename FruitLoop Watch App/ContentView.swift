@@ -11,12 +11,13 @@ struct ContentView: View {
     
 //    Array with the fruits we want to iterate over
     @State var fruits = ["🍎 Apple", "🍒 Cherries", "🍓 Strawberry", "🥭 Mango"]
+//    Rotate function on WatchOS
+    @State var scrollAmount = 14.0
     
     
     var body: some View {
         VStack{
-                    Text(fruits[0])
-                        .font(.system(size: 20))
+            Text(fruits[0]).font(.system(size: scrollAmount))
                     Spacer()
                     Button("Random"){
                         fruits.shuffle()
@@ -29,9 +30,13 @@ struct ContentView: View {
                         .multilineTextAlignment(.center)
                 }
                 .padding()
+                .focusable()
+                .digitalCrownRotation($scrollAmount, from: 10, through: 20, by:1, isContinuous: false)
                 .onAppear{
                     fruits.shuffle()
                 }
+
+
     }
 }
 
